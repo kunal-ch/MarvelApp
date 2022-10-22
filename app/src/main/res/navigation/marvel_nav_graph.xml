@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/marvel_nav_graph"
+    app:startDestination="@id/allCharactersFragment">
+    <fragment
+        android:id="@+id/allCharactersFragment"
+        android:name="com.kc.marvelapp.ui.fragments.AllCharactersFragment"
+        android:label="AllCharactersFragment">
+        <action
+            android:id="@+id/action_allCharactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedCharactersFragment"
+        android:name="com.kc.marvelapp.ui.fragments.SavedCharactersFragment"
+        android:label="SavedCharactersFragment">
+        <action
+            android:id="@+id/action_savedCharactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchCharactersFragment"
+        android:name="com.kc.marvelapp.ui.fragments.SearchCharactersFragment"
+        android:label="SearchCharactersFragment">
+        <action
+            android:id="@+id/action_searchCharactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.kc.marvelapp.ui.fragments.CharacterDetailFragment"
+        android:label="CharacterDetailFragment" />
+</navigation>
