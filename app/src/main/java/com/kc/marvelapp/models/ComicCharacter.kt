@@ -7,16 +7,16 @@ import androidx.room.PrimaryKey
     tableName = "characters"
 )
 data class ComicCharacter(
-    val comics: Comics,
+    //val comics: Comics,
     val description: String,
-    val events: Events,
+    //val events: Events,
     @PrimaryKey
     val id: Int,
     val modified: String,
     val name: String,
     val resourceURI: String,
-    val series: Series,
-    val stories: Stories,
-    val thumbnail: Thumbnail,
-    val urls: List<Url>
+    //val series: Series,
+    //val stories: Stories,
+    //val thumbnail: Thumbnail,
+    //val urls: List<Url>
 )
