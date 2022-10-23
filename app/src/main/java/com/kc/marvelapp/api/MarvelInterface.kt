@@ -10,8 +10,8 @@ interface MarvelInterface {
 
     @GET("v1/public/characters")
     suspend fun getAllCharacters(
-        @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
+        @Query("apikey") apiKey: String = BuildConfig.API_KEY,
         @Query("hash") hash : String = BuildConfig.HASH,
-        @Query("apiKey") ts: Int = 1,
+        @Query("ts") ts: Int = 1,
     ) : Response<AllCharactersResponse>
 }
