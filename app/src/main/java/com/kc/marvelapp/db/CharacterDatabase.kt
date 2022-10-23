@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.kc.marvelapp.models.ComicCharacter
 
 @Database(
     entities = [ComicCharacter::class],
     version = 1
 )
+@TypeConverters(CharacterConverter::class)
 abstract class CharacterDatabase: RoomDatabase() {
 
     abstract fun getCharacterDao() : CharacterDao

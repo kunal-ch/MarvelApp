@@ -38,7 +38,8 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterViewHolde
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         holder.itemView.apply {
             val character = differ.currentList[position]
-            Glide.with(this).load(character.resourceURI).into(ivCharacterImage)
+            val thumbnail = character.thumbnail.path + "." +character.thumbnail.extension
+            Glide.with(this).load(thumbnail).into(ivCharacterImage)
             tvName.text = character.name
             tvDescription.text = character.description
         }

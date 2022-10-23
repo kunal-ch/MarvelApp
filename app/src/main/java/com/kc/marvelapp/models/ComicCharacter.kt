@@ -17,6 +17,6 @@ data class ComicCharacter(
     val resourceURI: String,
     //val series: Series,
     //val stories: Stories,
-    //val thumbnail: Thumbnail,
+    val thumbnail: Thumbnail,
     //val urls: List<Url>
 )
