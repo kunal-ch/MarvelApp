@@ -30,7 +30,12 @@ class AllCharactersFragment: Fragment(R.layout.fragment_all_characters) {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MarvelViewModel::class.java)
         setUpRecyclerView()
         setUpObservers()
-        viewModel.getAllCharacters()
+        //viewModel.getAllCharacters()
+
+        viewModel.getGetAllCharacterFromDB().observe(viewLifecycleOwner, Observer { characters ->
+            Log.d("MarvelRepository", "db response successfull")
+            characterAdapter.differ.submitList(characters)
+        })
     }
 
     private fun setUpObservers() {
@@ -38,8 +43,8 @@ class AllCharactersFragment: Fragment(R.layout.fragment_all_characters) {
             when(response) {
                 is Resource.Success -> {
                     hideLoading()
-                    response.data?.let { characterResponse ->
-                        characterAdapter.differ.submitList(characterResponse.data.characters)
+                    response.data?.let { characterList ->
+                        characterAdapter.differ.submitList(characterList)
                     }
                 }
                 is Resource.Error -> {

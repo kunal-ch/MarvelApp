@@ -1,9 +1,11 @@
 package com.kc.marvelapp.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kc.marvelapp.models.AllCharactersResponse
+import com.kc.marvelapp.models.ComicCharacter
 import com.kc.marvelapp.repository.MarvelRepository
 import com.kc.marvelapp.util.Resource
 import kotlinx.coroutines.launch
@@ -11,15 +13,17 @@ import retrofit2.Response
 
 class MarvelViewModel(val marvelRepository: MarvelRepository): ViewModel() {
 
-    val allCharacters: MutableLiveData<Resource<AllCharactersResponse>> = MutableLiveData()
+    val allCharacters: MutableLiveData<Resource<List<ComicCharacter>>> = MutableLiveData()
 
-    fun getAllCharacters() {
+    private fun getAllCharactersApiAndUpdateDb(){
         viewModelScope.launch {
-            allCharacters.postValue(Resource.Loading())
-            val response = marvelRepository.getAllCharacters()
-            val result = handleAllCharactersResponse(response)
-            allCharacters.postValue(result)
+            marvelRepository.getAllCharactersApiAndUpdateDb()
         }
+    }
+
+    fun getGetAllCharacterFromDB(): LiveData<List<ComicCharacter>> {
+        getAllCharactersApiAndUpdateDb()
+        return marvelRepository.getAllCharactersFromDb()
     }
 
     private fun handleAllCharactersResponse(response: Response<AllCharactersResponse>): Resource<AllCharactersResponse> {
