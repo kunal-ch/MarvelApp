@@ -20,6 +20,10 @@ interface CharacterDao {
     @Delete
     suspend fun deleteCharacter(character: ComicCharacter)
 
+    @Query("SELECT * from characters WHERE name='A.I.M'")
+    suspend fun getCharacterInfo(): ComicCharacter
+
+
     @Query("DELETE from characters")
     suspend fun deleteAllCharacters()
 

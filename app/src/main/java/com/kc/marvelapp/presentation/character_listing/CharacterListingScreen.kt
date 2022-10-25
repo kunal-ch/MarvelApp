@@ -58,11 +58,6 @@ fun CharacterListingScreen(
                         character = character,
                         modifier = Modifier
                             .fillMaxWidth()
-                            /*.clickable {
-                                navigator.navigate(
-                                    CompanyInfoScreenDestination(company.symbol)
-                                )
-                            }*/
                             .padding(16.dp)
                     )
                     if(i < state.characters.size) {

@@ -9,4 +9,8 @@ interface MarvelRepository {
         fetchFromRemote: Boolean,
         query: String
     ): Flow<Resource<List<ComicCharacter>>>
+
+    suspend fun getCharacterInfo(
+        id: Int
+    ): Flow<Resource<ComicCharacter>>
 }

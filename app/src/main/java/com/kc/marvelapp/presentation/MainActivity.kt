@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.kc.marvelapp.presentation.character_info.CharacterInfoScreen
 import com.kc.marvelapp.presentation.character_listing.CharacterListingScreen
-import com.kc.marvelapp.presentation.theme.MarvelAppTheme
+import com.kc.marvelapp.ui.theme.MarvelAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

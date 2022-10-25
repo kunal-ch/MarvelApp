@@ -65,13 +65,15 @@ class MarvelRepositoryImpl @Inject constructor(
         return flow<Resource<List<ComicCharacter>>> {
             emit(Resource.Loading(true))
             val localListings = dao.searchCharacterListing(query)
-            emit(Resource.Success(
-                data = localListings
-            ))
+            emit(
+                Resource.Success(
+                    data = localListings
+                )
+            )
 
             val isDbEmpty = localListings.isEmpty() && query.isBlank()
             val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
-            if(shouldJustLoadFromCache) {
+            if (shouldJustLoadFromCache) {
                 Log.d(TAG, "List from Database : ${localListings.size}")
                 emit(Resource.Loading(false))
                 return@flow
@@ -87,7 +89,7 @@ class MarvelRepositoryImpl @Inject constructor(
                 } else {
                     listOf()
                 }
-            } catch(e: IOException) {
+            } catch (e: IOException) {
                 e.printStackTrace()
                 emit(Resource.Error("Couldn't load data"))
                 null
@@ -115,11 +117,32 @@ class MarvelRepositoryImpl @Inject constructor(
                     Log.d("MarvelRepository", "Database update successfull")
                 }*/
                 Log.d("MarvelRepository", "Now load from Database")
-                emit(Resource.Success(
-                    data = dao
-                        .searchCharacterListing("")
-                ))
+                emit(
+                    Resource.Success(
+                        data = dao
+                            .searchCharacterListing("")
+                    )
+                )
                 emit(Resource.Loading(false))
+            }
+        }
+    }
+
+    override suspend fun getCharacterInfo(
+        id: Int,
+    ): Flow<Resource<ComicCharacter>> {
+        return flow<Resource<ComicCharacter>> {
+            emit(Resource.Loading(true))
+            val localCharacter = dao.getCharacterInfo()
+            emit(
+                Resource.Success(
+                    data = localCharacter
+                )
+            )
+            if (localCharacter != null) {
+                Log.d(TAG, "Local character found : ${localCharacter.name}")
+                emit(Resource.Loading(false))
+                return@flow
             }
         }
     }
