@@ -42,10 +42,20 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterViewHolde
             Glide.with(this).load(thumbnail).into(ivCharacterImage)
             tvName.text = character.name
             tvDescription.text = character.description
+
+            setOnClickListener {
+                onItemClickListener?.let { it(character) }
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((ComicCharacter) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (ComicCharacter) -> Unit) {
+        onItemClickListener = listener
     }
 }

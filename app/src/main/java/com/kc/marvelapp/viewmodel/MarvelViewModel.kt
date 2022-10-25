@@ -34,4 +34,10 @@ class MarvelViewModel(val marvelRepository: MarvelRepository): ViewModel() {
         }
         return Resource.Error(response.message())
     }
+
+    fun addToFavourites(character: ComicCharacter) {
+        viewModelScope.launch {
+            marvelRepository.addCharacterToFavourite(character)
+        }
+    }
 }

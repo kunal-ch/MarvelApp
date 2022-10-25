@@ -30,5 +30,9 @@
     <fragment
         android:id="@+id/characterDetailFragment"
         android:name="com.kc.marvelapp.ui.fragments.CharacterDetailFragment"
-        android:label="CharacterDetailFragment" />
+        android:label="CharacterDetailFragment" >
+        <argument
+            android:name="character"
+            app:argType="com.kc.marvelapp.models.ComicCharacter" />
+    </fragment>
 </navigation>
