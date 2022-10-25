@@ -1,4 +1,4 @@
-package com.kc.marvelapp.api
+package com.kc.marvelapp.data.remote
 
 import com.kc.marvelapp.BuildConfig
 import com.kc.marvelapp.models.AllCharactersResponse
@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MarvelInterface {
+interface MarvelApi {
 
     @GET("v1/public/characters")
     suspend fun getAllCharacters(

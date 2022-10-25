@@ -1,4 +1,4 @@
-package com.kc.marvelapp.api
+package com.kc.marvelapp.data.remote
 
 import com.kc.marvelapp.util.Constant.Companion.BASE_URL
 import okhttp3.OkHttpClient
@@ -20,7 +20,7 @@ class RetrofitInstance {
         }
 
         val api by lazy {
-            retrofit.create(MarvelInterface::class.java)
+            retrofit.create(MarvelApi::class.java)
         }
     }
 }

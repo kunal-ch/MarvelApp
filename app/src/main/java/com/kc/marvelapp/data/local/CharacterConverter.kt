@@ -1,4 +1,4 @@
-package com.kc.marvelapp.db
+package com.kc.marvelapp.data.local
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
