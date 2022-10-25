@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.theme
+package com.kc.marvelapp.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
