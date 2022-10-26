@@ -3,6 +3,7 @@ package com.kc.marvelapp.presentation.character_info
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kc.marvelapp.domain.repository.MarvelRepository
@@ -13,19 +14,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterInfoViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val repository: MarvelRepository
 ): ViewModel() {
 
     var state by mutableStateOf(CharacterInfoState())
 
-    init {
-        getCharacterInfo()
+    init{
+        val id = savedStateHandle.get<String>("id")
+        if (id != null) {
+            getCharacterInfo(id)
+        }
     }
 
-    private fun getCharacterInfo() {
+    private fun getCharacterInfo(id: String) {
         viewModelScope.launch {
             repository
-                .getCharacterInfo(10009144)
+                .getCharacterInfo(id)
                 .collect { result ->
                     when(result) {
                         is Resource.Success -> {

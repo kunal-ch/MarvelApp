@@ -5,7 +5,7 @@ import com.kc.marvelapp.data.remote.RetrofitInstance
 import com.kc.marvelapp.data.local.MarvelDatabase
 import com.kc.marvelapp.data.remote.MarvelApi
 import com.kc.marvelapp.domain.repository.MarvelRepository
-import com.kc.marvelapp.models.ComicCharacter
+import com.kc.marvelapp.domain.models.ComicCharacter
 import com.kc.marvelapp.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,34 +25,6 @@ class MarvelRepositoryImpl @Inject constructor(
     private val TAG = "MarvelRepositoryImpl"
 
     private val dao = database.dao
-
-    //fun getAllCharactersFromDb() = dao.getAllCharacters()
-
-    /*suspend fun getAllCharactersApiAndUpdateDb(): List<ComicCharacter> {
-
-        var result = listOf<ComicCharacter>()
-        val response = RetrofitInstance.api.getAllCharacters()
-        if (response.isSuccessful){
-            response.body()?.let { resultResponse ->
-                Log.d("MarvelRepository", "api response successfull")
-                result = resultResponse.data.characters
-                withContext(Dispatchers.IO) {
-                    for (character in result) {
-                        dao.updateItem(
-                            modified = character.modified,
-                            description = character.description,
-                            name = character.name,
-                            resourceURI = character.resourceURI,
-                            thumbnail = character.thumbnail,
-                            id = character.id
-                        )
-                    }
-                }
-                //database.getCharacterDao().insertList(result)
-            }
-        }
-        return result
-    }*/
 
     suspend fun addCharacterToFavourite(character: ComicCharacter) {
         dao.upsert(character)
@@ -129,21 +101,41 @@ class MarvelRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCharacterInfo(
-        id: Int,
+        id: String,
     ): Flow<Resource<ComicCharacter>> {
         return flow<Resource<ComicCharacter>> {
             emit(Resource.Loading(true))
-            val localCharacter = dao.getCharacterInfo()
-            emit(
-                Resource.Success(
-                    data = localCharacter
-                )
-            )
-            if (localCharacter != null) {
-                Log.d(TAG, "Local character found : ${localCharacter.name}")
-                emit(Resource.Loading(false))
-                return@flow
+
+            val remoteListings = try {
+                val response = api.getCharacter(id)
+                if (response.isSuccessful) {
+                    response.body()?.let { resultResponse ->
+                        Log.d("MarvelRepository", "Character detail api response successfull")
+                        resultResponse.data.characters
+                    }
+                } else {
+                    listOf()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data"))
+                null
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data"))
+                null
             }
+            remoteListings?.let { remoteListings
+                if (remoteListings.isNotEmpty()) {
+                    emit(
+                        Resource.Success(
+                            data = remoteListings[0]
+                        )
+                    )
+                }
+            }
+            emit(Resource.Loading(false))
+            return@flow
         }
     }
 }

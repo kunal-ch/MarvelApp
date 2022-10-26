@@ -1,4 +1,4 @@
-package com.kc.marvelapp.models
+package com.kc.marvelapp.domain.models
 
 data class Url(
     val type: String,
