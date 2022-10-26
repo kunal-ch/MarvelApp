@@ -36,6 +36,8 @@ class MarvelRepositoryImpl @Inject constructor(
     ): Flow<Resource<List<ComicCharacter>>> {
         return flow<Resource<List<ComicCharacter>>> {
             emit(Resource.Loading(true))
+
+            // First fetch from database
             val localListings = dao.searchCharacterListing(query)
             emit(
                 Resource.Success(
@@ -51,6 +53,7 @@ class MarvelRepositoryImpl @Inject constructor(
                 return@flow
             }
 
+            // If database is empty then fetch from network
             val remoteListings = try {
                 val response = api.getAllCharacters()
                 if (response.isSuccessful) {
@@ -73,7 +76,8 @@ class MarvelRepositoryImpl @Inject constructor(
 
             Log.d(TAG, "Api list size : ${remoteListings?.size}")
             remoteListings?.let { listings ->
-                dao.deleteAllCharacters()
+
+                // Update the database
                 dao.insertList(listings)
                 /*withContext(Dispatchers.IO) {
                     for (character in listings) {
