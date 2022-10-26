@@ -1,6 +1,6 @@
-package com.kc.marvelapp.models
+package com.kc.marvelapp.domain.models
 
-data class Events(
+data class Series(
     val available: Int,
     val collectionURI: String,
     val items: List<Item>,

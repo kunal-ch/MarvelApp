@@ -1,6 +1,6 @@
 package com.kc.marvelapp.domain.repository
 
-import com.kc.marvelapp.models.ComicCharacter
+import com.kc.marvelapp.domain.models.ComicCharacter
 import com.kc.marvelapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 
@@ -11,6 +11,6 @@ interface MarvelRepository {
     ): Flow<Resource<List<ComicCharacter>>>
 
     suspend fun getCharacterInfo(
-        id: Int
+        id: String
     ): Flow<Resource<ComicCharacter>>
 }

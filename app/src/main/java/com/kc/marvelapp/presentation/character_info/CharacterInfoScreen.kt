@@ -19,7 +19,7 @@ import com.kc.marvelapp.ui.theme.DarkBlue
 
 @Composable
 fun CharacterInfoScreen(
-    id: Int,
+    id: String,
     viewModel: CharacterInfoViewModel = hiltViewModel()
 ) {
     val state = viewModel.state

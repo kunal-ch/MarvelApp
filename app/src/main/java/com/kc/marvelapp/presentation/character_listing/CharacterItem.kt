@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kc.marvelapp.models.ComicCharacter
+import com.kc.marvelapp.domain.models.ComicCharacter
 
 @Composable
 fun CharacterItem(

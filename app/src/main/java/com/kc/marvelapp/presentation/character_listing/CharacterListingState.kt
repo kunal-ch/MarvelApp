@@ -1,6 +1,6 @@
 package com.kc.marvelapp.presentation.character_listing
 
-import com.kc.marvelapp.models.ComicCharacter
+import com.kc.marvelapp.domain.models.ComicCharacter
 
 data class CharacterListingState(
     val characters: List<ComicCharacter> = emptyList(),

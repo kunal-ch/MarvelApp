@@ -13,11 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.kc.marvelapp.navigation.Screen
 
 @Composable
 fun CharacterListingScreen(
+    navController: NavController,
     viewModel: CharacterListingViewModel = hiltViewModel()
 ) {
     val swipeRefreshState = rememberSwipeRefreshState(
@@ -58,6 +61,9 @@ fun CharacterListingScreen(
                         character = character,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .clickable {
+                                navController.navigate(Screen.CharacterInfoScreen.withArgs(character.id.toString()))
+                            }
                             .padding(16.dp)
                     )
                     if(i < state.characters.size) {

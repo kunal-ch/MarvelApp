@@ -2,8 +2,8 @@ package com.kc.marvelapp.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.kc.marvelapp.models.ComicCharacter
-import com.kc.marvelapp.models.Thumbnail
+import com.kc.marvelapp.domain.models.ComicCharacter
+import com.kc.marvelapp.domain.models.Thumbnail
 
 @Dao
 interface CharacterDao {
@@ -22,7 +22,6 @@ interface CharacterDao {
 
     @Query("SELECT * from characters WHERE name='A.I.M'")
     suspend fun getCharacterInfo(): ComicCharacter
-
 
     @Query("DELETE from characters")
     suspend fun deleteAllCharacters()

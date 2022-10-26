@@ -1,4 +1,4 @@
-package com.kc.marvelapp.models
+package com.kc.marvelapp.domain.models
 
 import com.google.gson.annotations.SerializedName
 
