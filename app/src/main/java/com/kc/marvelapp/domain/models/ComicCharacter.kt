@@ -8,17 +8,12 @@ import java.io.Serializable
     tableName = "characters"
 )
 data class ComicCharacter(
-    //val comics: Comics,
-    //val events: Events,
     @PrimaryKey
     val id: Int,
     val modified: String,
     val description: String,
     val name: String,
     val resourceURI: String,
-    //val series: Series,
-    //val stories: Stories,
     val thumbnail: Thumbnail,
     var isFavourite: Boolean = false
-    //val urls: List<Url>
 ) : Serializable

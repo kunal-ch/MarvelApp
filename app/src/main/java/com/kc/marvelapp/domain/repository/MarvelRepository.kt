@@ -4,6 +4,9 @@ import com.kc.marvelapp.domain.models.ComicCharacter
 import com.kc.marvelapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Repository to get character listing and info
+ */
 interface MarvelRepository {
     suspend fun getCharacterListings(
         fetchFromRemote: Boolean,

@@ -1,6 +1,5 @@
 package com.kc.marvelapp.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.kc.marvelapp.domain.models.ComicCharacter
 import com.kc.marvelapp.domain.models.Thumbnail
@@ -13,18 +12,6 @@ interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertList(character: List<ComicCharacter>)
-
-    @Query("SELECT * from characters")
-    fun getAllCharacters(): LiveData<List<ComicCharacter>>
-
-    @Delete
-    suspend fun deleteCharacter(character: ComicCharacter)
-
-    @Query("SELECT * from characters WHERE name='A.I.M'")
-    suspend fun getCharacterInfo(): ComicCharacter
-
-    @Query("DELETE from characters")
-    suspend fun deleteAllCharacters()
 
     @Query("UPDATE characters SET modified = :modified ,description= :description,name= :name, resourceURI= :resourceURI,thumbnail= :thumbnail   WHERE id LIKE :id ")
     fun updateItem(modified: String, description: String, name: String, resourceURI: String, thumbnail: Thumbnail, id: Int): Int

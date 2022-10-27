@@ -18,6 +18,9 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kc.marvelapp.navigation.Screen
 
+/**
+ * Shows the list for characters with Search
+ */
 @Composable
 fun CharacterListingScreen(
     navController: NavController,

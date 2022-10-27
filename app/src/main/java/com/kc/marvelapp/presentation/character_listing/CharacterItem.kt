@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kc.marvelapp.domain.models.ComicCharacter
+import com.kc.marvelapp.util.Utils
 
 @Composable
 fun CharacterItem(
@@ -38,15 +39,15 @@ fun CharacterItem(
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text(
+                /*Text(
                     text = character.name,
                     fontWeight = FontWeight.Light,
                     color = MaterialTheme.colors.onBackground
-                )
+                )*/
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "(${character.modified})",
+                text = Utils.getDate(character.modified),
                 fontStyle = FontStyle.Italic,
                 color = MaterialTheme.colors.onBackground
             )

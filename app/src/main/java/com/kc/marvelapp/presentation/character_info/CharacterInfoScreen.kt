@@ -21,8 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kc.marvelapp.ui.theme.DarkBlue
+import com.kc.marvelapp.util.Utils
 import com.skydoves.landscapist.coil.CoilImage
 
+/**
+ * Character Detail Screen
+ */
 @Composable
 fun CharacterInfoScreen(
     id: String,
@@ -62,7 +66,7 @@ fun CharacterInfoScreen(
 
                     // Modified
                     Text(
-                        text = character.modified,
+                        text = Utils.getDate(character.modified),
                         fontStyle = FontStyle.Italic,
                         fontSize = 14.sp,
                         modifier = Modifier.fillMaxWidth()

@@ -1,21 +1,21 @@
 package com.kc.marvelapp.data.repository
 
 import android.util.Log
-import com.kc.marvelapp.data.remote.RetrofitInstance
 import com.kc.marvelapp.data.local.MarvelDatabase
 import com.kc.marvelapp.data.remote.MarvelApi
 import com.kc.marvelapp.domain.repository.MarvelRepository
 import com.kc.marvelapp.domain.models.ComicCharacter
 import com.kc.marvelapp.util.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Repository Implementation
+ */
 @Singleton
 class MarvelRepositoryImpl @Inject constructor(
     private val api: MarvelApi,
@@ -44,7 +44,6 @@ class MarvelRepositoryImpl @Inject constructor(
                     data = localListings
                 )
             )
-
             val isDbEmpty = localListings.isEmpty() && query.isBlank()
             val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
             if (shouldJustLoadFromCache) {
@@ -79,19 +78,6 @@ class MarvelRepositoryImpl @Inject constructor(
 
                 // Update the database
                 dao.insertList(listings)
-                /*withContext(Dispatchers.IO) {
-                    for (character in listings) {
-                        dao.updateItem(
-                            modified = character.modified,
-                            description = character.description,
-                            name = character.name,
-                            resourceURI = character.resourceURI,
-                            thumbnail = character.thumbnail,
-                            id = character.id
-                        )
-                    }
-                    Log.d("MarvelRepository", "Database update successfull")
-                }*/
                 Log.d("MarvelRepository", "Now load from Database")
                 emit(
                     Resource.Success(

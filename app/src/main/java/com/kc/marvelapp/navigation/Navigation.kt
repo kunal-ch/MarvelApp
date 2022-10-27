@@ -10,6 +10,9 @@ import com.kc.marvelapp.navigation.Screen
 import com.kc.marvelapp.presentation.character_info.CharacterInfoScreen
 import com.kc.marvelapp.presentation.character_listing.CharacterListingScreen
 
+/**
+ * Navigation for compose
+ */
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
