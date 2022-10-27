@@ -15,5 +15,6 @@ data class ComicCharacter(
     val name: String,
     val resourceURI: String,
     val thumbnail: Thumbnail,
+    val comics: Comics,
     var isFavourite: Boolean = false
 ) : Serializable
