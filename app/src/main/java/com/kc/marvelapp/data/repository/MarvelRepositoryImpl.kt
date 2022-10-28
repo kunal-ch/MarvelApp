@@ -47,7 +47,7 @@ class MarvelRepositoryImpl @Inject constructor(
             val isDbEmpty = localListings.isEmpty() && query.isBlank()
             val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
             if (shouldJustLoadFromCache) {
-                Log.d(TAG, "List from Database : ${localListings.size}")
+                //Log.d(TAG, "List from Database : ${localListings.size}")
                 emit(Resource.Loading(false))
                 return@flow
             }
@@ -57,7 +57,7 @@ class MarvelRepositoryImpl @Inject constructor(
                 val response = api.getAllCharacters()
                 if (response.isSuccessful) {
                     response.body()?.let { resultResponse ->
-                        Log.d("MarvelRepository", "api response successfull")
+                        //Log.d("MarvelRepository", "api response successfull")
                         resultResponse.data.characters
                     }
                 } else {
@@ -73,12 +73,12 @@ class MarvelRepositoryImpl @Inject constructor(
                 null
             }
 
-            Log.d(TAG, "Api list size : ${remoteListings?.size}")
+            //Log.d(TAG, "Api list size : ${remoteListings?.size}")
             remoteListings?.let { listings ->
 
                 // Update the database
                 dao.insertList(listings)
-                Log.d("MarvelRepository", "Now load from Database")
+                //Log.d("MarvelRepository", "Now load from Database")
                 emit(
                     Resource.Success(
                         data = dao

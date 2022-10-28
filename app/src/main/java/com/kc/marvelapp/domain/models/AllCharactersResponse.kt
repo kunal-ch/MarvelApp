@@ -5,7 +5,7 @@ data class AllCharactersResponse(
     val attributionText: String,
     val code: Int,
     val copyright: String,
-    val data: Data,
+    var data: Data,
     val etag: String,
     val status: String
 )

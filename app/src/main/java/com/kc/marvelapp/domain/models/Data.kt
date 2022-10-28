@@ -7,6 +7,6 @@ data class Data(
     val limit: Int,
     val offset: Int,
     @SerializedName("results")
-    val characters: List<ComicCharacter>,
+    var characters: List<ComicCharacter>,
     val total: Int
 )
